@@ -1,60 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Paper Maker</title>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<meta charset="UTF-8">
+<title>Paper Maker</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>Paper Maker Software</h1>
+<div class="container">
 
-<textarea id="questionBox" placeholder="Enter question..."></textarea>
-<br>
+    <!-- HEADER -->
+    <div id="paperHeader">
+        <h2>SCHOOL / INSTITUTE NAME</h2>
+        <p>Annual Examination 2026</p>
 
-<button onclick="addQuestion()">Add Question</button>
-<button onclick="downloadPDF()">Download PDF</button>
+        <div class="row">
+            <span>Subject: ____________</span>
+            <span>Time: 2 Hours</span>
+        </div>
 
-<ul id="questionList"></ul>
+        <div class="row">
+            <span>Total Marks: 50</span>
+            <span>Date: ____________</span>
+        </div>
 
-<script>
-let questions = [];
+        <p>Name: ____________ &nbsp;&nbsp;&nbsp; Roll No: ____________</p>
+    </div>
 
-function addQuestion() {
-  let q = document.getElementById("questionBox").value;
+    <!-- BUTTONS -->
+    <div class="buttons">
+        <button onclick="addMCQ()">Add MCQ (Q1)</button>
+        <button onclick="addQuestion()">Add Question</button>
+        <button onclick="downloadPDF()">Download PDF</button>
+    </div>
 
-  if (q === "") {
-    alert("Question enter karo");
-    return;
-  }
+    <!-- PAPER OUTPUT -->
+    <div id="paperArea"></div>
 
-  questions.push(q);
+</div>
 
-  let li = document.createElement("li");
-  li.innerText = q;
-  document.getElementById("questionList").appendChild(li);
-
-  document.getElementById("questionBox").value = "";
-}
-
-function downloadPDF() {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-
-  let y = 10;
-
-  doc.text("Question Paper", 10, y);
-  y += 10;
-
-  questions.forEach((q, i) => {
-    doc.text((i + 1) + ". " + q, 10, y);
-    y += 10;
-  });
-
-  doc.save("paper.pdf");
-}
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
